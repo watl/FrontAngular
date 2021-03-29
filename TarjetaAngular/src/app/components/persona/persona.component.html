@@ -1,0 +1,92 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="titulo">Lista de Personas</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">{{ accion | uppercase }} PERSONAS</h5>
+
+                    <form [formGroup]="form" (ngSubmit)="guardarPersona()">
+                        <div class="row">
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user" [class.green-icon]="this.form.get('nombre')?.valid"
+                                        [class.red-icon]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched"></i>
+                                </span>
+                                <input formControlName="nombre" maxlength="50" type="text" class="form-control"
+                                    placeholder="Nombre">
+                            </div>
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user" [class.green-icon]="this.form.get('apellidos')?.valid"
+                                        [class.red-icon]="this.form.get('apellidos')?.invalid && this.form.get('apellidos')?.touched"></i>
+                                </span>
+                                <input formControlName="apellidos" maxlength="50" type="text" class="form-control"
+                                    placeholder="Apellidos">
+                            </div>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fas fa-address-card"
+                                        [class.green-icon]="this.form.get('direccion')?.valid"
+                                        [class.red-icon]="this.form.get('direccion')?.invalid && this.form.get('direccion')?.touched"></i>
+                                </span>
+                                <input formControlName="direccion" minlength="5" maxlength="250" type="text"
+                                    class="form-control" placeholder="Direccion">
+                            </div>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone-alt" [class.green-icon]="this.form.get('telefono')?.valid"
+                                        [class.red-icon]="this.form.get('telefono')?.invalid && this.form.get('telefono')?.touched"></i>
+                                </span>
+                                <input formControlName="telefono" maxlength="12" type="text" class="form-control"
+                                    placeholder="Telefono">
+                            </div>
+
+
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-database"></i>&nbsp; Aceptar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">LISTADO DE PERSONAS</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let persona of listPersonas">
+                                <td>{{ persona.nombre }}</td>
+                                <td>{{ persona.apellidos }}</td>
+                                <td>{{ persona.direccion }}</td>
+                                <td>{{ persona.telefono }}</td>
+                                <td>
+                                    <i (click)="editarPersona(persona)" class="far fa-edit text-info"></i>
+                                </td>
+                                <td>
+                                    <i (click)="eliminarPersona(persona.id)" class="far fa-trash-alt text-danger"></i>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
